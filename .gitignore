@@ -1,0 +1,10 @@
+node_modules/
+data/*.json
+.env
+*.log
+*.pem
+CLinic.pem
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
