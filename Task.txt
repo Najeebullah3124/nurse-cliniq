@@ -1,0 +1,228 @@
+Nurse ClinIQ – Developer Instructions
+1. Project Overview
+
+Project Name: Nurse ClinIQ
+Tagline: “Assessing Clinical Competency for Future Nurses”
+
+Purpose:
+A web-based system where nursing students can log in using their student number, view required clinical competencies, take quizzes (various formats), and track their progress with real-time pass/fail results. The system will serve as a prototype/dummy platform primarily for demonstration and proposal purposes.
+
+Key Goals:
+
+Student registration/login using student number.
+
+Competency tracking with status indicators: Pending, Completed, Pass, Fail.
+
+Interactive quizzes for each competency (multiple-choice, drag-and-drop, matching, etc.).
+
+Real-time progress dashboard.
+
+Simple admin control panel to manage students and competencies.
+
+Online deployment so the client/admin can access it securely.
+
+AI-assisted quiz generation (optional, can use OpenAI API for question creation).
+
+2. Tech Stack
+
+Frontend:
+
+HTML5, CSS3, JavaScript (Vanilla JS or lightweight frameworks like React)
+
+Responsive design to support desktop and mobile
+
+Backend:
+
+Node.js + Express OR Python Flask/Django (depending on preference)
+
+Database:
+
+PostgreSQL or MySQL for structured student and competency data
+
+Alternative: SQLite for a simpler dummy version
+
+AI Integration (Optional):
+
+OpenAI API to generate quiz questions or hints
+
+Deployment:
+
+Server: VPS or cloud service (DigitalOcean, AWS EC2, or Heroku for demo purposes)
+
+SSL enabled (HTTPS) for security
+
+Basic authentication and authorization
+
+Other Tools:
+
+Git for version control
+
+JSON format for storing quiz questions and answers (if database integration is minimal)
+
+3. Database Structure
+
+Tables & Fields
+
+Students Table
+Field Name	Type	Notes
+student_id	INT / UUID	Primary Key
+student_number	VARCHAR	Unique login ID
+name	VARCHAR	Full name
+email (optional)	VARCHAR	Optional for future updates
+registration_date	DATETIME	Auto timestamp
+Competencies Table
+Field Name	Type	Notes
+competency_id	INT / UUID	Primary Key
+name	VARCHAR	Competency name
+description	TEXT	Short description
+Student_Competency Table (tracks progress)
+Field Name	Type	Notes
+id	INT / UUID	Primary Key
+student_id	INT / UUID	Foreign Key to Students
+competency_id	INT / UUID	Foreign Key to Competencies
+status	ENUM	Pending / Completed
+result	ENUM	Pass / Fail
+quiz_score	INT	Optional
+last_attempt	DATETIME	Timestamp of last quiz
+Quizzes Table
+Field Name	Type	Notes
+quiz_id	INT / UUID	Primary Key
+competency_id	INT / UUID	Foreign Key to Competencies
+question_text	TEXT	Question content
+question_type	ENUM	Multiple-choice, drag-drop, matching
+options	JSON	Stores answers/options
+correct_answer	JSON	Correct response(s)
+4. Functionality / Features
+4.1 Student Side
+
+Login/Register
+
+Students log in using their student number.
+
+Restricted access: Only registered students can access the dashboard.
+
+Dashboard
+
+Displays all competencies with status (Pending / Completed / Pass / Fail).
+
+Visual progress indicator (bar or percentage).
+
+Quiz Functionality
+
+Each competency has its own quiz.
+
+Multiple question types:
+
+Multiple-choice
+
+Drag-and-drop
+
+Matching
+
+Automatic scoring updates status and Pass/Fail result.
+
+Optional: AI-generated questions (via OpenAI API).
+
+4.2 Admin Side
+
+Dashboard
+
+View list of all students and their progress.
+
+Competency Management
+
+Add, edit, remove competencies.
+
+Quiz Management
+
+Add or update quizzes for each competency.
+
+Student Management
+
+Register new students manually if needed.
+
+Reset passwords or student numbers.
+
+Reports
+
+Download CSV or JSON of student performance and competency completion.
+
+4.3 Design & UI
+
+Color Scheme:
+
+Soft Blue (#4A90E2) → headers, buttons
+
+White (#FFFFFF) → main background
+
+Light Gray (#F5F5F5) → cards, panels
+
+Navigation
+
+Top navigation bar with “Dashboard,” “Competencies,” “Quizzes,” “Profile”
+
+Dashboard Layout
+
+Competency cards with:
+
+Competency name
+
+Status: Pending / Completed
+
+Result: Pass / Fail
+
+Button: Take Quiz
+
+5. Workflow
+
+Student logs in → sees dashboard.
+
+Student selects a competency → clicks “Take Quiz.”
+
+System presents quiz questions → student submits answers.
+
+Quiz auto-graded → status updates (Pending → Completed) and result displayed.
+
+Admin can monitor student progress in real-time.
+
+Optionally, quiz questions can be generated dynamically using OpenAI API.
+
+6. Deployment
+
+Use a cloud server or hosting service with:
+
+Domain setup: e.g., nursecliniq.com (optional for demo).
+
+SSL certificate for secure login.
+
+Backend deployed via Node.js or Python framework.
+
+Database hosted securely (PostgreSQL / MySQL).
+
+Simple file-based logs for tracking student activity.
+
+7. Documentation for Client
+
+Project Summary
+
+Login Instructions (student & admin)
+
+Competency Tracking
+
+Quiz Usage
+
+Progress Reports & Analytics
+
+System Requirements (browser, internet, supported devices)
+
+8. Deliverables
+
+Fully functional web prototype.
+
+Source code with detailed comments.
+
+Installation / deployment instructions.
+
+User documentation in plain language (AI detection-free).
+
+Optional: AI-based quiz generation integration.
